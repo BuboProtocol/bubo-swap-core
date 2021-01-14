@@ -1,11 +1,11 @@
 {
-  "name": "@pancakeswap-libs/pancake-swap-core",
-  "description": "🎛 Core contracts for the pancake protocol",
+  "name": "bubo-swap-core",
+  "description": "🎛 Core contracts for the bubo protocol",
   "version": "0.1.0",
-  "homepage": "https://pancakeswap.finance",
+  "homepage": "https://bubo.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pancakeswap/pancake-swap-core.git"
+    "url": "https://github.com/BuboProtocol/bubo-swap-core.git"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
@@ -43,8 +43,11 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "truffle-hdwallet-provider": "^1.0.17",
+    "@openzeppelin/contracts": "^2.5.1",
+    "@truffle/hdwallet-provider": "^1.2.1",
+    "dotenv": "^8.2.0",
+    "truffle-plugin-verify": "^0.5.4",
     "truffle": "^5.1.41",
-    "truffle-flattener": "^1.4.4"
+    "truffle-flattener": "^1.5.0"
   }
 }
