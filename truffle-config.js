@@ -24,6 +24,9 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+require('dotenv').config();
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -42,11 +45,19 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
+    development: {
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 8545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+    },
+    bsc_testnet: {
+      provider: () => new HDWalletProvider(process.env.MNENOMIC, "https://data-seed-prebsc-1-s1.binance.org:8545"),
+      network_id: 97
+    },
+    bsc: {
+      provider: () => new HDWalletProvider(process.env.MNENOMIC, "https://bsc-dataseed1.binance.org"),
+      network_id: 56
+    },
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
@@ -78,19 +89,25 @@ module.exports = {
   mocha: {
     // timeout: 100000
   },
+  plugins: [
+    'truffle-plugin-verify'
+  ],
+  api_keys: {
+    bscscan: process.env.BSCSCAN_API_KEY
+  },
 
   // Configure your compilers
   compilers: {
     solc: {
-      // version: "0.5.1",    // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.5.16",    // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      // settings: {          // See the solidity docs for advice about optimization and evmVersion
-      //  optimizer: {
-      //    enabled: false,
-      //    runs: 200
-      //  },
-      //  evmVersion: "byzantium"
-      // }
+      settings: {          // See the solidity docs for advice about optimization and evmVersion
+        optimizer: {
+          enabled: false,
+          runs: 200
+        },
+        //evmVersion: "byzantium"
+      }
     }
   }
 };
